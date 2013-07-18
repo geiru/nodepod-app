@@ -1,0 +1,11 @@
+.error {
+    color:red;
+}
+
+.connected {
+    color:green;
+}
+
+.not-connected {
+    color:orange;
+}

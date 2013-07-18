@@ -1,0 +1,21 @@
+{
+    "name": "Nodepod",
+    "description": "Visual testing of websites on multiple devices",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "connect": "2.7.10",
+        "cookie": "0.1.0",
+        "ejs": "0.8.3",
+        "express": "3.1.x",
+        "http-proxy": "0.8.7",
+        "node-uuid": "1.4.0",
+        "optimist": "0.3.x",
+        "socket.io": "0.9.13",
+        "step": "0.0.5",
+        "useragent": "2.0.4"
+    }
+}
