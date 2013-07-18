@@ -43,10 +43,10 @@ WEINRE_PORT and NODEPOD_PORT are ports, that the programms are bound to. You can
 go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT --weinre_host WEINRE_HOST --weinre_port WEINRE_PORT`
 
 you should see something like
-``
+```
 info  - socket.io started
 Server running on NODEPOD_HOST:NODEPOD_PORT
-``
+```
 
 
 ## Without weinre
@@ -55,11 +55,10 @@ Server running on NODEPOD_HOST:NODEPOD_PORT
 go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT`
 
 you should see something like
-``
+```
 info  - socket.io started
-
 Server running on NODEPOD_HOST:NODEPOD_PORT
-``
+```
 
 ## Chrome extension
 
