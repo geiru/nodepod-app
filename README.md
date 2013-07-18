@@ -42,14 +42,22 @@ WEINRE_PORT and NODEPOD_PORT are ports, that the programms are bound to. You can
 ### start nodepod
 go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT --weinre_host WEINRE_HOST --weinre_port WEINRE_PORT`
 
+you should see something like
+``
+info  - socket.io started
+Server running on NODEPOD_HOST:NODEPOD_PORT
+``
+
 
 ## Without weinre
 
 ### start nodepod
 go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT`
-your should see something like
+
+you should see something like
 ``
 info  - socket.io started
+
 Server running on NODEPOD_HOST:NODEPOD_PORT
 ``
 
@@ -59,12 +67,12 @@ Now, that nodepod (and weinre) is running, you can start your chrome browser and
 Click on it and you will see a popup with some inputs ("address", "port" and "name") and a button ("create master"). Fill in the ip address and port that nodepod is running on
 (NODEPOD_HOST and NODEPOD_PORT) and click "create master" (you can leave "name" empty). If you connected successfully, you should see a name, a client port and an url in the popup window.
 
-You can now load a wabpage that you want to test in any chrome tab.
+You can now load a webpage that you want to test in any chrome tab.
 
 ## Connect a device
 
 Now get your device (or another browser on your desktop) and open `NODEPOD_HOST:NODEPOD_PORT` in your browser. You should now see a button "Connect as client". Click on it and you get redirected.
-It should now open the page that you are viewing in your chrome.
+It should now open the page that you are viewing in your chrome browser.
 
 
 # Supported platforms
