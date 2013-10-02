@@ -1,5 +1,5 @@
 <script src="<%= settings.core.config.protocol %>://<%= settings.core.config.host %>:<%= settings.core.config.port %>/socket.io/socket.io.js"></script>
-<script>
+<script type="text/javascript">
 var socket = io.connect('<%= settings.core.config.protocol %>://<%= settings.core.config.host %>:<%= settings.core.config.port %>?token=<%= master.token %>&clientPort=<%= master.clientPort %>&type=client');
 
 socket.on('error', function (reason){
@@ -39,5 +39,5 @@ socket.on('click', function(data) {
 });
 </script>
 <% if (settings.core.config.weinre.host && settings.core.config.weinre.port)  { %>
-    <script src="http://<%= settings.core.config.weinre.host %>:<%= settings.core.config.weinre.port %>/target/target-script-min.js"></script>
+    <script src="<%= settings.core.config.weinre.protocol %>://<%= settings.core.config.weinre.host %>:<%= settings.core.config.weinre.port %>/target/target-script-min.js"></script>
 <% } %>

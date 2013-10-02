@@ -62,6 +62,8 @@ socketio.configure(function() {
                             master.host = handshakeData.address.address;
                         }
                         break;
+                    case 'masterStatus':
+                        break;
                     case 'client':
                         // check session
                         if (!handshakeData.headers.cookie) {
@@ -110,53 +112,56 @@ socketio.sockets.on('connection', function(socket) {
         socket.join(room);
 
 
-        if (socket.handshake.type == 'master') {
-            // send updateMaster message to clients and index pages
-            sendUpdateMaster(master, room, true);
-
-            socket.on('reconnect', function() {
-                // update master
-                master.host = socket.handshake.address.address;
+        switch(socket.handshake.type) {
+            case 'master':
                 // send updateMaster message to clients and index pages
                 sendUpdateMaster(master, room, true);
-            });
 
-            socket.on('disconnect', function() {
-                // update master
-                master.host = false;
-                // send updateMaster message to clients and index pages
+                socket.on('reconnect', function() {
+                    // update master
+                    master.host = socket.handshake.address.address;
+                    // send updateMaster message to clients and index pages
+                    sendUpdateMaster(master, room, true);
+                });
+
+                socket.on('disconnect', function() {
+                    // update master
+                    master.host = false;
+                    // send updateMaster message to clients and index pages
+                    sendUpdateMaster(master, room, true);
+                });
+
+                // listen for master events
+                socket.on('updateUrl', function(data) {
+                    if (data.url) {
+                        // set url in client proxy
+                        if (master.clientProxy.setUrl(data.url)) {
+                            // send refresh message to all clients in this room
+                            socketio.sockets['in'](room).emit('reload', {
+                                href: master.clientProxy.getPath()
+                            });
+                        };
+                    }
+                });
+
+                socket.on('click', function(data) {
+                    if (data.element) {
+                        // send click message to all clients in this room
+                        socketio.sockets['in'](room).emit('click', data);
+                    }
+                });
+                break;
+            case 'masterStatus':
+                break;
+            case 'client':
+                // add new client to client list of master
+                master.addClient(socket.handshake.sessionId, socket.handshake.headers['user-agent'], socket.handshake.address.address);
+
+                // send updateMaster message to master, clients and index pages
                 sendUpdateMaster(master, room, true);
-            });
 
-            // listen for master events
-            socket.on('updateUrl', function(data) {
-                if (data.url) {
-                    // set url in client proxy
-                    if (master.clientProxy.setUrl(data.url)) {
-                        // send refresh message to all clients in this room
-                        socketio.sockets['in'](room).emit('reload', {
-                            href: master.clientProxy.getPath()
-                        });
-                    };
-                }
-            });
-
-            socket.on('click', function(data) {
-                if (data.element) {
-                    // send click message to all clients in this room
-                    socketio.sockets['in'](room).emit('click', data);
-                }
-            });
-        }
-        else {
-            // add new client to client list of master
-            master.addClient(socket.handshake.sessionId, socket.handshake.headers['user-agent'], socket.handshake.address.address);
-
-            // send updateMaster message to master, clients and index pages
-            sendUpdateMaster(master, room, true);
-
-            // listen for client events
-
+                // listen for client events
+                break;
         }
     }
 });

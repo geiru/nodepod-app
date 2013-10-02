@@ -47,6 +47,9 @@ app.get('/client/:clientPort', route_client.client);
 // createMaster
 app.post('/json/createMaster', route_master.json.createMaster);
 
+// status page
+app.get('/master/:token/:clientPort', route_master.master);
+
 // start express server
 server.listen(app_core.config.port, app_core.config.host);
 

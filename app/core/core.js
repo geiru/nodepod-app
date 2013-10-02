@@ -8,7 +8,7 @@ var argv = require('optimist')
     .alias('q', 'weinre_port')
     .describe('h', 'address that the app is running on')
     .describe('p', 'port that the app is listening on')
-    .describe('i', 'address that the weinre debug server is running on (skip if no weinre)')
+    .describe('i', 'address that the weinre debug server is running on (skip if no weinre or if this is the same as h)')
     .describe('q', 'port that the weinre debug server is listening on (skip if no weinre)')
     .argv;
 
@@ -30,8 +30,9 @@ var package_json = require(global.buildAppPath('package.json')),
             }
         },
         weinre: {
-            host: argv.i,
-            port: argv.q
+            host: (argv.i ? argv.i : argv.h),
+            port: argv.q,
+            protocol: 'http'
         }
     };
 

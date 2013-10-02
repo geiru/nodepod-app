@@ -40,14 +40,14 @@ function Master(clientPort, name, password) {
     this.clientUrl = app_core.config.protocol+'://'+app_core.config.host+':'+app_core.config.port+'/client/'+this.clientPort;
     this.socketConnectUrl = app_core.config.protocol+'://'+app_core.config.host+':'+app_core.config.port+'?token='+this.token+'&clientPort='+this.clientPort+'&type=master';
     this.clients = {};
-
-    // TODO move to client proxy
-    this.excludes = [
-        app_core.config.host+':'+app_core.config.port
-    ];
+    this.statusUrl = app_core.config.protocol+'://'+app_core.config.host+':'+app_core.config.port+'/master/'+this.token+'/'+this.clientPort;
     if (app_core.config.weinre.host && app_core.config.weinre.port) {
-        this.excludes.push(app_core.config.weinre.host+':'+app_core.config.weinre.port);
+        this.weinreUrl = app_core.config.weinre.protocol+'://'+app_core.config.weinre.host+':'+app_core.config.weinre.port+'/client';
     }
+    else {
+        this.weinreUrl = false;
+    }
+
 
     //
     // helper functions

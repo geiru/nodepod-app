@@ -82,8 +82,23 @@ function createMaster(req, res)
         // render error
         route_index.json.index(req, res, error);
     }
-
-
 }
+
+function master(req, res) {
+    var token = req.params.token,
+        clientPort = req.params.clientPort,
+        master,
+        error = false;
+
+    master = masterList.getMaster(clientPort);
+
+    if (!master || token != master.token) {
+        error = 'Invalid master.';
+    }
+
+    res.render('master', {error: error, master: master, masterStr: JSON.stringify(master.output())});
+}
+
+exports.master = master;
 exports.json = {};
 exports.json.createMaster = createMaster;
