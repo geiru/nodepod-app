@@ -35,26 +35,26 @@ WEINRE_PORT and NODEPOD_PORT are ports, that the programms are bound to. You can
 
 ## With weinre
 
-### start weinre
-
-`weinre --boundHost WEINRE_HOST --httPort WEINRE_PORT`
+Make sure weinre is in your path.
 
 ### start nodepod
-go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT --weinre_host WEINRE_HOST --weinre_port WEINRE_PORT`
+Go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT --weinre_host WEINRE_HOST --weinre_port WEINRE_PORT`
+If NODEPOD_HOST is the same as WEINRE_HOST (which usually should be the case), you can omit the option --weinre_host WEINRE_HOST. Just type
+`node app --host NODEPOD_HOST --port NODEPOD_PORT --weinre_port WEINRE_PORT`
 
-you should see something like
+You should see something like
 ```
 info  - socket.io started
 Server running on NODEPOD_HOST:NODEPOD_PORT
+Trying to start weinre on WEINRE_HOST:WEINRE_PORT
 ```
-
 
 ## Without weinre
 
 ### start nodepod
-go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT`
+Go to nodepod directory and type `node app --host NODEPOD_HOST --port NODEPOD_PORT`
 
-you should see something like
+You should see something like
 ```
 info  - socket.io started
 Server running on NODEPOD_HOST:NODEPOD_PORT
@@ -96,5 +96,9 @@ If you want to contribute, clone the repository.
 
 There are a few unit tests under `test/`. You need to install `https://github.com/caolan/nodeunit` to run the tests.
 
+# dependecies
 
-
+- nodejs (http://nodejs.org/)
+- socket.io (https://github.com/LearnBoost/socket.io)
+- weinre (http://people.apache.org/~pmuellr/weinre/docs/latest/) [optional]
+- see package.json for dependecies on other node modules
