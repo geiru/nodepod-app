@@ -225,7 +225,7 @@ ClientProxy.prototype._applyDefaultUrlObj = function(defaultUrlObj, urlObj) {
     var prop;
 
     for(prop in defaultUrlObj) {
-        if (typeof urlObj[prop] == 'undefined') {
+        if (typeof urlObj[prop] == 'undefined' || urlObj[prop] === null) {
             urlObj[prop] = defaultUrlObj[prop];
         }
     }

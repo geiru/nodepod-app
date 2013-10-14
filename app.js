@@ -15,7 +15,13 @@ var app_core = require('./app/core/core.js'), // parse command line options; ini
 console.log('Server running on '+app_core.config.host+':'+app_core.config.port);
 if (app_core.config.weinre.host && app_core.config.weinre.port) {
     console.log('Trying to start weinre on '+app_core.config.weinre.host+':'+app_core.config.weinre.port);
-    weinre = modChildProcess.spawn('weinre', ['--boundHost', app_core.config.weinre.host, '--httpPort', app_core.config.weinre.port]);
+
+    if (app_core.config.os.isWin) {
+        weinre = modChildProcess.spawn('cmd', ['/c', 'weinre', '--boundHost', app_core.config.weinre.host, '--httpPort', app_core.config.weinre.port]);
+    }
+    else {
+        weinre = modChildProcess.spawn('weinre', ['--boundHost', app_core.config.weinre.host, '--httpPort', app_core.config.weinre.port]);
+    }
 
     weinre.stdout.on('data', function(data) {
        console.log('[weinre]: '+data);

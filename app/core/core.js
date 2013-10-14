@@ -15,6 +15,7 @@ var argv = require('optimist')
 // load package json to access information about own module
 var package_json = require(global.buildAppPath('package.json')),
     modUuid = require('node-uuid'),
+    modOs = require('os'),
     Master = require(global.buildAppPath('app/core/master.js')).Master,
     config = {
         port: argv.p,
@@ -33,6 +34,9 @@ var package_json = require(global.buildAppPath('package.json')),
             host: (argv.i ? argv.i : argv.h),
             port: argv.q,
             protocol: 'http'
+        },
+        os: {
+            isWin: (modOs.platform().search(/^win/) != -1)
         }
     };
 
